@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Трейдерский Калькулятор</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding-top: 50px;
+    }
+    .container {
+      max-width: 700px;
+      width: 90%;
+      margin: 40px auto;
+      max-width: 500px;
+      margin: 40px auto;
+      box-sizing: border-box;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 12px;
+      width: 400px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      border-radius: 6px;
+      border: none;
+      background-color: #2d3e50;
+      color: white;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      background: #1e90ff;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 16px;
+      white-space: pre-wrap;
+    }
+    .history {
+      font-size: 14px;
+      line-height: 1.4;
+      margin-top: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px;
+      border-radius: 10px;
+    }
+    .history-item {
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 6px;
+    }
+  
+    
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      width: 90%;
+      margin: 40px auto;
+      max-width: 500px;
+      margin: 40px auto;
+      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #ffffffdd;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+    select {
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg fill='white' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 18px;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      border: none;
+      padding: 14px;
+      border-radius: 4px;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: #0072ff;
+    }
+    .result {
+      margin-top: 20px;
+      background: rgba(0,0,0,0.3);
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  
+    .tab-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .tab-buttons button {
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 6px;
+      border: none;
+      background: #0072ff;
+      color: white;
+      cursor: pointer;
+    }
+    .tab-buttons button.active {
+      background: #00c6ff;
+    }
+    .calculator {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 0;
+      display: none;
+    }
+    .calculator.active {
+      display: block;
+    }
+  
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .container {
+      max-width: 700px;
+      width: 90%;
+      margin: 40px auto;
+        width: 100%;
+        padding: 20px 15px;
+      }
+      .tab-buttons {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .tab-buttons button {
+        width: 100%;
+      }
+      input, select, button {
+        font-size: 16px;
+        padding: 10px;
+      }
+    }
+    </style>
+    
+</head>
+<body>
+  <div class="container">
+    <h2 style="text-align: center;">🔧 Трейдерский Калькулятор</h2>
+    <div class="tab-buttons">
+      <button onclick="showCalc('leverage')" id="btn-leverage" class="active">Калькулятор Плеча</button>
+      <button onclick="showCalc('atr')" id="btn-atr">Калькулятор ATR</button>
+    </div>
+
+    <div id="leverage" class="calculator active">
+      
+  <div class="container">
+    <h2>Калькулятор Плеча Трейдера</h2>
+
+    <label>Тип позиции:
+      <select id="positionType">
+        <option value="long">Лонг</option>
+        <option value="short">Шорт</option>
+      </select>
+    </label>
+
+    <label>Цена входа ($):
+      <input type="number" step="any" id="entryPrice">
+    </label>
+    <label>Цена стопа ($):
+      <input type="number" step="any" id="stopPrice">
+    </label>
+    <label>Риск на сделку ($):
+      <input type="number" step="any" id="risk">
+    </label>
+    <label>Депозит ($):
+      <input type="number" step="any" id="capital">
+    </label>
+    <button onclick="calculate()">Рассчитать</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculate() {
+      let entry = parseFloat(document.getElementById('entryPrice').value);
+      let stop = parseFloat(document.getElementById('stopPrice').value);
+      let risk = parseFloat(document.getElementById('risk').value);
+      let capital = parseFloat(document.getElementById('capital').value);
+      let positionType = document.getElementById('positionType').value;
+
+      if (isNaN(entry) || isNaN(stop) || isNaN(risk) || isNaN(capital)) {
+        document.getElementById('result').innerHTML = "❌ Введите корректные данные!";
+        return;
+      }
+
+      let stopSize;
+      if (positionType === "long") {
+        if (stop >= entry) {
+          document.getElementById('result').innerHTML = "❌ Для лонга стоп должен быть ниже входа!";
+          return;
+        }
+        stopSize = entry - stop;
+      } else {
+        if (stop <= entry) {
+          document.getElementById('result').innerHTML = "❌ Для шорта стоп должен быть выше входа!";
+          return;
+        }
+        stopSize = stop - entry;
+      }
+
+      let stopPct = stopSize / entry;
+
+      if (stopPct <= 0) {
+        document.getElementById('result').innerHTML = "❌ Стоп не может быть равен нулю!";
+        return;
+      }
+
+      if (stopPct < 0.001) {
+        document.getElementById('result').innerHTML =
+          "⚠️ Внимание: стоп менее 0.1% — возможно, ошибка ввода.";
+        return;
+      }
+
+      let positionSize = risk / stopPct;
+      let leverage = positionSize / capital;
+
+      document.getElementById('result').innerHTML =
+        `<span>🛑 Стоп-уровень: $${stop.toFixed(6)}</span><br>
+         <span>✅ Размер стопа: $${stopSize.toFixed(6)} (${(stopPct*100).toFixed(2)}%)</span><br>
+         <span>💰 Размер позиции: $${positionSize.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span><br>
+         <span>⚙️ Рекомендуемое плечо: x${leverage.toFixed(2)*100}</span>`;
+    }
+  </script>
+
+    </div>
+
+    <div id="atr" class="calculator">
+      
+  <div class="container">
+    <h2>ATR Калькулятор</h2>
+
+    <label>Название инструмента:</label>
+    <input type="text" id="instrumentName" placeholder="Например, BTCUSDT">
+
+    <div id="inputs"></div>
+
+    <script>
+      const inputsDiv = document.getElementById('inputs');
+      for (let i = 1; i <= 5; i++) {
+        inputsDiv.innerHTML += `
+          <label>День ${i} - High и Low:</label>
+          <div style="display: flex; gap: 10px; width: 100%;">
+            <input type="number" step="any" id="high${i}" placeholder="High">
+            <input type="number" step="any" id="low${i}" placeholder="Low">
+          </div>
+        `;
+      }
+    </script>
+
+    <button onclick="calculateATR()">Рассчитать</button>
+
+    <div class="result" id="result"></div>
+
+    <div class="history" id="history">
+      <strong>История расчётов:</strong>
+      <div id="historyList"></div>
+    </div>
+  </div>
+
+  <script>
+    function calculateATR() {
+      let totalRange = 0;
+      let count = 0;
+      const name = document.getElementById('instrumentName').value.trim();
+      const title = name || 'Без названия';
+
+      for (let i = 1; i <= 5; i++) {
+        const high = parseFloat(document.getElementById('high' + i).value);
+        const low = parseFloat(document.getElementById('low' + i).value);
+
+        if (!isNaN(high) && !isNaN(low)) {
+          totalRange += high - low;
+          count++;
+        }
+      }
+
+      if (count === 0) {
+        document.getElementById('result').innerText = "Введите хотя бы одну пару значений.";
+        return;
+      }
+
+      const averageATR = totalRange / count;
+      const atr20 = averageATR * 0.2;
+
+      const resultText = `Инструмент: ${title}\nСредний ATR: ${averageATR.toFixed(2)}\n20% от ATR: ${atr20.toFixed(2)}`;
+      document.getElementById('result').innerText = resultText;
+
+      addToHistory(title, averageATR, atr20);
+    }
+
+    function addToHistory(name, atr, atr20) {
+      const list = document.getElementById('historyList');
+      const item = document.createElement('div');
+      item.className = 'history-item';
+      const now = new Date().toLocaleString();
+      item.textContent = `${now} — ${name}: ATR = ${atr.toFixed(2)}, 20% = ${atr20.toFixed(2)}`;
+      list.prepend(item);
+    }
+  </script>
+
+    </div>
+  </div>
+
+  <script>
+    function showCalc(which) {
+      document.getElementById('leverage').classList.remove('active');
+      document.getElementById('atr').classList.remove('active');
+      document.getElementById('btn-leverage').classList.remove('active');
+      document.getElementById('btn-atr').classList.remove('active');
+      document.getElementById(which).classList.add('active');
+      document.getElementById('btn-' + which).classList.add('active');
+    }
+  </script>
+  <script>
+    function calculate() {
+      let entry = parseFloat(document.getElementById('entryPrice').value);
+      let stop = parseFloat(document.getElementById('stopPrice').value);
+      let risk = parseFloat(document.getElementById('risk').value);
+      let capital = parseFloat(document.getElementById('capital').value);
+      let positionType = document.getElementById('positionType').value;
+
+      if (isNaN(entry) || isNaN(stop) || isNaN(risk) || isNaN(capital)) {
+        document.getElementById('result').innerHTML = "❌ Введите корректные данные!";
+        return;
+      }
+
+      let stopSize;
+      if (positionType === "long") {
+        if (stop >= entry) {
+          document.getElementById('result').innerHTML = "❌ Для лонга стоп должен быть ниже входа!";
+          return;
+        }
+        stopSize = entry - stop;
+      } else {
+        if (stop <= entry) {
+          document.getElementById('result').innerHTML = "❌ Для шорта стоп должен быть выше входа!";
+          return;
+        }
+        stopSize = stop - entry;
+      }
+
+      let stopPct = stopSize / entry;
+
+      if (stopPct <= 0) {
+        document.getElementById('result').innerHTML = "❌ Стоп не может быть равен нулю!";
+        return;
+      }
+
+      if (stopPct < 0.001) {
+        document.getElementById('result').innerHTML =
+          "⚠️ Внимание: стоп менее 0.1% — возможно, ошибка ввода.";
+        return;
+      }
+
+      let positionSize = risk / stopPct;
+      let leverage = positionSize / capital;
+
+      document.getElementById('result').innerHTML =
+        `<span>🛑 Стоп-уровень: $${stop.toFixed(6)}</span><br>
+         <span>✅ Размер стопа: $${stopSize.toFixed(6)} (${(stopPct*100).toFixed(2)}%)</span><br>
+         <span>💰 Размер позиции: $${positionSize.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span><br>
+         <span>⚙️ Рекомендуемое плечо: x${leverage.toFixed(2)*100}</span>`;
+    }
+  </script>
+  <script>
+      const inputsDiv = document.getElementById('inputs');
+      for (let i = 1; i <= 5; i++) {
+        inputsDiv.innerHTML += `
+          <label>День ${i} - High и Low:</label>
+          <div style="display: flex; gap: 10px; width: 100%;">
+            <input type="number" step="any" id="high${i}" placeholder="High">
+            <input type="number" step="any" id="low${i}" placeholder="Low">
+          </div>
+        `;
+      }
+    </script>
+  <script>
+    function calculateATR() {
+      let totalRange = 0;
+      let count = 0;
+      const name = document.getElementById('instrumentName').value.trim();
+      const title = name || 'Без названия';
+
+      for (let i = 1; i <= 5; i++) {
+        const high = parseFloat(document.getElementById('high' + i).value);
+        const low = parseFloat(document.getElementById('low' + i).value);
+
+        if (!isNaN(high) && !isNaN(low)) {
+          totalRange += high - low;
+          count++;
+        }
+      }
+
+      if (count === 0) {
+        document.getElementById('result').innerText = "Введите хотя бы одну пару значений.";
+        return;
+      }
+
+      const averageATR = totalRange / count;
+      const atr20 = averageATR * 0.2;
+
+      const resultText = `Инструмент: ${title}\nСредний ATR: ${averageATR.toFixed(2)}\n20% от ATR: ${atr20.toFixed(2)}`;
+      document.getElementById('result').innerText = resultText;
+
+      addToHistory(title, averageATR, atr20);
+    }
+
+    function addToHistory(name, atr, atr20) {
+      const list = document.getElementById('historyList');
+      const item = document.createElement('div');
+      item.className = 'history-item';
+      const now = new Date().toLocaleString();
+      item.textContent = `${now} — ${name}: ATR = ${atr.toFixed(2)}, 20% = ${atr20.toFixed(2)}`;
+      list.prepend(item);
+    }
+  </script>
+</body>
+</html>
